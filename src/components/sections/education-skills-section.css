@@ -1,0 +1,388 @@
+.education-skills-section {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(20px, 3vw, 36px);
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
+  margin: 0 auto;
+  max-width: 1800px;
+  padding: 12px clamp(20px, 2.2vw, 40px) 32px;
+  width: 100%;
+}
+
+.education-skills-card {
+  background: var(--surface);
+  border: 2px solid var(--foreground);
+  border-radius: 36px;
+  color: var(--foreground);
+  min-width: 0;
+  padding: clamp(20px, 1.6vw, 28px);
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.education-skills-card:hover,
+.education-skills-card:focus-within {
+  box-shadow: 9px 9px 0 var(--foreground);
+}
+
+.skills-card {
+  order: 2;
+}
+
+.education-card {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+
+.skills-card-heading {
+  align-items: center;
+  border-bottom: 2px solid var(--line);
+  display: flex;
+  gap: 16px;
+  padding-bottom: 12px;
+}
+
+.skills-heading-icon,
+.education-icon {
+  align-items: center;
+  background: var(--foreground);
+  border-radius: 14px;
+  color: var(--surface);
+  display: inline-flex;
+  flex: 0 0 52px;
+  height: 48px;
+  justify-content: center;
+}
+
+.skills-heading-icon svg {
+  height: 26px;
+  width: 26px;
+}
+
+.education-skills-section .skills-card-heading h2 {
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 750;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.skills-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
+}
+
+.skill-group {
+  min-width: 0;
+}
+
+.skill-group h3,
+.coursework h3 {
+  color: var(--muted-foreground);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.skill-dock-list {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-dock-list .dock-item {
+  display: flex;
+  min-width: 0;
+}
+
+.skill-dock-list .dock-link {
+  align-items: center;
+  background: color-mix(in srgb, var(--foreground) 5%, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  color: var(--foreground);
+  display: inline-flex;
+  height: 44px;
+  justify-content: center;
+  min-width: 44px;
+  padding: 5px;
+  position: relative;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease;
+  transform-origin: center bottom;
+}
+
+.skill-dock-list .dock-image {
+  height: min(var(--dock-icon-size, 38px), 30px);
+  object-fit: contain;
+  width: min(var(--dock-icon-size, 38px), 30px);
+}
+
+.skill-dock-list .dock-tooltip {
+  background: var(--foreground);
+  border-radius: 6px;
+  bottom: calc(100% + 8px);
+  color: var(--surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  left: 50%;
+  line-height: 1.2;
+  opacity: 0;
+  padding: 6px 8px;
+  pointer-events: none;
+  position: absolute;
+  transform: translate(-50%, 4px);
+  transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
+  visibility: hidden;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.skill-dock-list .dock-link:hover .dock-tooltip,
+.skill-dock-list .dock-link:focus-visible .dock-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  visibility: visible;
+}
+
+.skill-dock-list .dock-link:hover {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  border-color: var(--accent);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 24%, transparent);
+  transform: translateY(-8px) scale(1.28);
+}
+
+.skill-dock-list:has(.dock-link:hover) .dock-link:not(:hover) {
+  transform: scale(.9);
+}
+
+.skill-dock-list .dock-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skill-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-tag-list li,
+.coursework-list li {
+  background: color-mix(in srgb, var(--foreground) 5%, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 550;
+  line-height: 1.3;
+  padding: 5px 7px;
+}
+
+.education-topline {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.education-icon {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+  color: var(--foreground);
+  flex-basis: 68px;
+  height: 68px;
+}
+
+.education-icon svg {
+  height: 32px;
+  width: 32px;
+}
+
+.graduation-pill {
+  background: var(--foreground);
+  border-radius: 999px;
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1;
+  padding: 11px 13px;
+  white-space: nowrap;
+}
+
+.education-details {
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(20px, 1.6vw, 24px);
+}
+
+.education-skills-section .university-name {
+  align-items: center;
+  color: var(--muted-foreground);
+  display: flex;
+  font-size: 0.76rem;
+  font-weight: 700;
+  gap: 7px;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.university-name svg {
+  flex: 0 0 17px;
+  height: 17px;
+  width: 17px;
+}
+
+.education-skills-section .education-card h2 {
+  font-size: clamp(1.15rem, 1.65vw, 1.4rem);
+  font-weight: 750;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.education-skills-section .degree-name {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
+.coursework {
+  margin-top: 12px;
+}
+
+.coursework-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.coursework-list li {
+  background: color-mix(in srgb, var(--foreground) 3%, var(--surface));
+  font-size: 0.7rem;
+  padding: 5px 7px;
+}
+
+.gpa-block {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.gpa-block > strong {
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-weight: 750;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.gpa-block > span {
+  color: var(--muted-foreground);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.gpa-block b {
+  color: var(--accent);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+  .education-skills-section {
+    grid-template-columns: minmax(240px, 0.48fr) minmax(0, 1fr);
+    padding: 12px 3% 28px;
+  }
+
+  .education-skills-card {
+    border-radius: 30px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .education-skills-section {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px 7% 24px;
+  }
+
+  .skills-card {
+    order: 2;
+  }
+
+  .education-card {
+    order: 1;
+  }
+
+  .education-details {
+    padding-top: 20px;
+  }
+
+  .gpa-block {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .education-skills-section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .education-skills-card {
+    border-radius: 24px;
+    padding: 20px;
+  }
+
+  .skills-card-heading {
+    gap: 12px;
+  }
+
+  .skills-heading-icon {
+    flex-basis: 44px;
+    height: 44px;
+  }
+
+  .graduation-pill {
+    font-size: 0.65rem;
+    padding: 10px;
+  }
+
+  .dock-image {
+    height: 30px;
+    width: 30px;
+  }
+
+  .dock-link {
+    height: 42px;
+    min-width: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .education-skills-card,
+  .skill-dock-list .dock-link,
+  .skill-dock-list .dock-tooltip {
+    transition: none;
+  }
+}
