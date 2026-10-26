@@ -30,7 +30,7 @@ export function DockIcon({ href, name, src }: DockIconProps) {
   return (
     <li className="dock-item">
       <a className="dock-link" href={href} aria-label={name}>
-        <Image className="dock-image" src={src} alt="" />
+        <Image className="dock-image" src={src} alt="" width={38} height={38} sizes="30px" />
         <span className="dock-tooltip" aria-hidden="true">
           {name}
         </span>

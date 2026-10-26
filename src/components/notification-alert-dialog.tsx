@@ -24,41 +24,91 @@ function initialsFor(name: string) {
 }
 
 export function Component() {
-    const [notifications, setNotifications] = useState<Notification[]>([])
+    const [notifications, setNotifications] = useState<Notification[]>(() => {
+        if (typeof window === "undefined") return []
+        try {
+            return JSON.parse(localStorage.getItem("portfolio-chat-notifications") ?? "[]") as Notification[]
+        } catch {
+            return []
+        }
+    })
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
+        const readStored = () => {
+            try {
+                return JSON.parse(localStorage.getItem("portfolio-chat-notifications") ?? "[]") as Notification[]
+            } catch {
+                return []
+            }
+        }
+        const save = (next: Notification[]) => {
+            setNotifications(next)
+            localStorage.setItem("portfolio-chat-notifications", JSON.stringify(next))
+        }
         const handleChatMessage = (event: Event) => {
-            const detail = (event as CustomEvent<{ sender?: string; message?: string }>).detail
+            const detail = (event as CustomEvent<{ id?: string; createdAt?: string; sender?: string; message?: string }>).detail
             const sender = detail?.sender?.trim() || "Chat Room"
             const notification: Notification = {
-                id: `chat-${Date.now()}`,
+                id: detail?.id ?? `chat-${Date.now()}`,
                 sender: { name: sender, initials: initialsFor(sender) },
                 message: detail?.message?.trim() || "Ada pesan baru di Chat Room.",
-                time: "Baru saja",
+                time: detail?.createdAt ? new Date(detail.createdAt).toLocaleString("id-ID") : "Baru saja",
                 read: false,
             }
 
-            setNotifications((current) => [notification, ...current])
+            const current = readStored()
+            save([notification, ...current.filter((item) => item.id !== notification.id)])
             setIsOpen(true)
+        }
+        const handleChatSnapshot = (event: Event) => {
+            const snapshot = (event as CustomEvent<Array<{ id: string; createdAt: string; sender: string; message: string }>>).detail
+            const currentById = new Map(readStored().map((item) => [item.id, item]))
+            const next = snapshot.map((item) => {
+                const existing = currentById.get(item.id)
+                return existing ?? {
+                    id: item.id,
+                    sender: { name: item.sender, initials: initialsFor(item.sender) },
+                    message: item.message,
+                    time: new Date(item.createdAt).toLocaleString("id-ID"),
+                    read: false,
+                }
+            })
+            const hasNew = next.some((item) => !currentById.has(item.id))
+            save(next)
+            if (hasNew) setIsOpen(true)
+        }
+        const handleChatOpened = () => {
+            save([])
+            setIsOpen(false)
         }
 
         window.addEventListener("portfolio:chat-message", handleChatMessage)
-        return () => window.removeEventListener("portfolio:chat-message", handleChatMessage)
+        window.addEventListener("portfolio:chat-snapshot", handleChatSnapshot)
+        window.addEventListener("portfolio:open-chat", handleChatOpened)
+        return () => {
+            window.removeEventListener("portfolio:chat-message", handleChatMessage)
+            window.removeEventListener("portfolio:chat-snapshot", handleChatSnapshot)
+            window.removeEventListener("portfolio:open-chat", handleChatOpened)
+        }
     }, [])
 
     const unreadCount = notifications.filter((notification) => !notification.read).length
 
     const markAsRead = (id: string) => {
-        setNotifications((current) =>
-            current.map((notification) =>
+        setNotifications((current) => {
+            const next = current.map((notification) =>
                 notification.id === id ? { ...notification, read: true } : notification,
-            ),
-        )
+            )
+            localStorage.setItem("portfolio-chat-notifications", JSON.stringify(next))
+            return next
+        })
     }
 
     const markAllAsRead = () => {
-        setNotifications((current) => current.map((notification) => ({ ...notification, read: true })))
+        setNotifications([])
+        localStorage.removeItem("portfolio-chat-notifications")
+        setIsOpen(false)
     }
 
     return (

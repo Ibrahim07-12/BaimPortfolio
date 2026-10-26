@@ -107,11 +107,24 @@ export default function ChatRoom() {
             const newMessage = nextMessages.find((message) => !previousIds.has(message.id));
             if (newMessage) {
               window.dispatchEvent(new CustomEvent("portfolio:chat-message", {
-                detail: { sender: newMessage.display_name, message: newMessage.content },
+                detail: {
+                  id: newMessage.id,
+                  createdAt: newMessage.created_at,
+                  sender: newMessage.display_name,
+                  message: newMessage.content,
+                },
               }));
             }
           }
           knownMessageIds.current = new Set(nextMessages.map((message) => message.id));
+          window.dispatchEvent(new CustomEvent("portfolio:chat-snapshot", {
+            detail: nextMessages.map((message) => ({
+              id: message.id,
+              createdAt: message.created_at,
+              sender: message.display_name,
+              message: message.content,
+            })),
+          }));
           setMessages(nextMessages);
         }
         if (active) setErrorMessage("");

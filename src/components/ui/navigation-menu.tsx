@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, type Variants } from "framer-motion";
+import { createPortal } from "react-dom";
+import { motion, useMotionValueEvent, useScroll, type Variants } from "framer-motion";
 import { ArrowUpRight, Menu, MessageCircle, Moon, Navigation, Sun } from "lucide-react";
 import GooeyNav from "@/components/GooeyNav";
 import { cn } from "@/lib/utils";
@@ -78,6 +79,7 @@ export function AnimatedNavFramer() {
     typeof window !== "undefined" && window.localStorage.getItem("portfolio-theme") === "dark" ? "dark" : "light"
   ));
   const [transitionTheme, setTransitionTheme] = React.useState<"light" | "dark" | null>(null);
+  const [transitionPhase, setTransitionPhase] = React.useState<"expand" | "contract">("expand");
   const [themeOrigin, setThemeOrigin] = React.useState({ x: 0, y: 0 });
   const themeButtonRef = React.useRef<HTMLButtonElement>(null);
   const themeTransitionTimer = React.useRef<number | null>(null);
@@ -273,9 +275,11 @@ export function AnimatedNavFramer() {
             type="button"
             onClick={(event) => {
               event.stopPropagation();
+              if (transitionTheme) return;
               const nextTheme = theme === "light" ? "dark" : "light";
               const bounds = themeButtonRef.current?.getBoundingClientRect();
               if (bounds) setThemeOrigin({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 });
+              setTransitionPhase("expand");
               setTransitionTheme(nextTheme);
               if (themeTransitionTimer.current !== null) window.clearTimeout(themeTransitionTimer.current);
               themeTransitionTimer.current = window.setTimeout(() => {
@@ -283,10 +287,13 @@ export function AnimatedNavFramer() {
                 document.documentElement.dataset.theme = nextTheme;
                 window.localStorage.setItem("portfolio-theme", nextTheme);
                 themeTransitionTimer.current = window.setTimeout(() => {
-                  setTransitionTheme(null);
-                  themeTransitionTimer.current = null;
-                }, 560);
-              }, 430);
+                  setTransitionPhase("contract");
+                  themeTransitionTimer.current = window.setTimeout(() => {
+                    setTransitionTheme(null);
+                    themeTransitionTimer.current = null;
+                  }, 420);
+                }, 120);
+              }, 520);
             }}
             aria-label="Toggle light/dark mode"
           >
@@ -317,21 +324,19 @@ export function AnimatedNavFramer() {
           </motion.div>
         </div>
       </motion.nav>
-      <AnimatePresence>
-        {transitionTheme && <motion.div
-          className="theme-transition-wipe"
-          initial={{ clipPath: `circle(0% at ${themeOrigin.x}px ${themeOrigin.y}px)` }}
-          animate={[
-            `circle(160% at ${themeOrigin.x}px ${themeOrigin.y}px)`,
-            `circle(160% at ${themeOrigin.x}px ${themeOrigin.y}px)`,
-            `circle(0% at ${themeOrigin.x}px ${themeOrigin.y}px)`,
-          ]}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.86, times: [0, 0.48, 1], ease: [0.22, 1, 0.36, 1] }}
-          style={{ background: transitionTheme === "dark" ? "#0b1220" : "#f8fafc" }}
+      {transitionTheme && typeof document !== "undefined" && createPortal(
+        <div
+          key={`${transitionTheme}-${themeOrigin.x}-${themeOrigin.y}`}
+          className={`theme-transition-wipe${transitionPhase === "contract" ? " is-contracting" : " is-expanding"}`}
+          style={{
+            "--theme-origin-x": `${themeOrigin.x}px`,
+            "--theme-origin-y": `${themeOrigin.y}px`,
+            background: transitionTheme === "dark" ? "#0b1220" : "#f8fafc",
+          } as React.CSSProperties}
           aria-hidden="true"
-        />}
-      </AnimatePresence>
+        />,
+        document.body,
+      )}
     </div>
   );
 }
