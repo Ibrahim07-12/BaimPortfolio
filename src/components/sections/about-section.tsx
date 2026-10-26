@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Download } from "lucide-react";
-import ProfileCard from "@/components/ProfileCard";
-import ScrollReveal from "@/components/ScrollReveal";
-import TechText from "@/components/TechText";
-import TextType from "@/components/TextType";
+import ProfileCard from "@/components/animations/ProfileCard";
+import ScrollReveal from "@/components/animations/ScrollReveal";
+import TechText from "@/components/animations/TechText";
+import TextType from "@/components/animations/TextType";
 import profilePhoto from "@/foto/Myself.png";
-import "./about-section.css";
+import "@/styles/sections/about-section.css";
 
 const aboutCopy =
   "Fresh graduate in Applied Electronics Engineering from Universitas Negeri Yogyakarta with practical experience in industrial automation, robotics, embedded systems, IoT, and Machine Learning. Skilled in sensor integration, microcontroller programming, PCB design, and web-based monitoring systems. Experienced in developing industrial IoT solutions and applying Machine Learning for predictive maintenance and early fault detection.";

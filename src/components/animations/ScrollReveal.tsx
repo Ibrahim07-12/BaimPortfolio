@@ -12,7 +12,7 @@ import React, {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import './ScrollReveal.css';
+import '@/styles/animations/ScrollReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

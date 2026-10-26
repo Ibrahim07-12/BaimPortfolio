@@ -10,7 +10,7 @@ import {
   type ReactNode
 } from 'react';
 
-import './GooeyNav.css';
+import '@/styles/animations/GooeyNav.css';
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 

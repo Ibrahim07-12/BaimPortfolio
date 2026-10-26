@@ -10,7 +10,7 @@ import {
   useVelocity,
   useAnimationFrame
 } from 'motion/react';
-import './ScrollVelocity.css';
+import '@/styles/animations/ScrollVelocity.css';
 
 interface VelocityMapping {
   input: [number, number];

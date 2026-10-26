@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type HTMLAttributes, type RefObject } from 'react';
 
-import './LaserFlow.css';
+import '@/styles/animations/LaserFlow.css';
 
 export interface LaserFlowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
   surfaceRef?: RefObject<HTMLElement | null>;

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import ParticleText from "@/components/ParticleText";
-import ScrollVelocity from "@/components/ScrollVelocity";
+import ParticleText from "@/components/animations/ParticleText";
+import ScrollVelocity from "@/components/animations/ScrollVelocity";
 import portrait from "@/foto/Foto saya.png";
 
 export default function HomeSection() {

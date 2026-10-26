@@ -4,7 +4,7 @@ import React, { useEffect, useId, useLayoutEffect, useRef, useState, type CSSPro
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowDown01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 
-import './GlideSelect.css';
+import '@/styles/animations/GlideSelect.css';
 
 export interface GlideSelectOption {
   value: string;

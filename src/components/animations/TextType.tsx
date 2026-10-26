@@ -11,7 +11,7 @@ import {
   useState
 } from 'react';
 import { gsap } from 'gsap';
-import './TextType.css';
+import '@/styles/animations/TextType.css';
 
 interface TextTypeProps {
   className?: string;

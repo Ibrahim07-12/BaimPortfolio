@@ -1,4 +1,4 @@
-import ChatRoom from "@/components/chat-room";
+import ChatRoom from "@/components/features/chat/chat-room";
 import HomeInfoRail from "@/components/sections/home-info-rail";
 import HomeSection from "@/components/sections/home-section";
 import AboutSection from "@/components/sections/about-section";
@@ -10,8 +10,8 @@ import AchievementsSection from "@/components/sections/achievements-section";
 import CertificationsSection from "@/components/sections/certifications-section";
 import ContactSection from "@/components/sections/contact-section";
 import { AnimatedNavFramer } from "@/components/ui/navigation-menu";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
-import NotificationAlertDialog from "@/components/notification-alert-dialog";
+import { SmoothCursor } from "@/components/animations/smooth-cursor";
+import NotificationAlertDialog from "@/components/features/chat/notification-alert-dialog";
 
 export default function Home() {
   return (

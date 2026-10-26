@@ -4,7 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { motion, useMotionValueEvent, useScroll, type Variants } from "framer-motion";
 import { ArrowUpRight, Menu, MessageCircle, Moon, Navigation, Sun } from "lucide-react";
-import GooeyNav from "@/components/GooeyNav";
+import GooeyNav from "@/components/animations/GooeyNav";
 import { cn } from "@/lib/utils";
 
 const navItems = [

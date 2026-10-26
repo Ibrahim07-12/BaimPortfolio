@@ -26,7 +26,7 @@ import mySQL from "@/PWD/MySQL.png";
 import nextJS from "@/PWD/Next.js.png";
 import python from "@/PWD/Python.png";
 import tailwindCSS from "@/PWD/TailwindCSS.png";
-import "./education-skills-section.css";
+import "@/styles/sections/education-skills-section.css";
 
 const programmingSkills = [
   { name: "C++", src: cpp },

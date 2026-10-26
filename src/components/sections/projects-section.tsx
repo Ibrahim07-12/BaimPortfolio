@@ -19,9 +19,9 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import GlyphPortal from "@/components/glyph-portal";
-import { HorizontalCard } from "@/components/horizontalcard";
-import ProjectPresentationPreview from "@/components/project-presentation-preview";
+import GlyphPortal from "@/components/features/projects/glyph-portal";
+import { HorizontalCard } from "@/components/features/projects/horizontalcard";
+import ProjectPresentationPreview from "@/components/features/projects/project-presentation-preview";
 import project1Cover from "@/Projects/project1/project1P.jpeg";
 import project1Drive from "@/Projects/project1/GD.png";
 import project2Cover from "@/Projects/project2/project2P.jpeg";
@@ -49,7 +49,7 @@ import project9Photo2 from "@/Projects/project9/F2(9).png";
 import project10Cover from "@/Projects/project10/picture10P.jpeg";
 import project10Photo1 from "@/Projects/project10/F1(10).jpg";
 import project10Photo2 from "@/Projects/project10/F2(10).jpeg";
-import "./projects-section.css";
+import "@/styles/sections/projects-section.css";
 
 type Project = {
   id: number;
@@ -448,7 +448,6 @@ function ProjectDetails({
           fill
           sizes="100vw"
           className="project-expanded-cover"
-          priority
         />
         <div className="project-expanded-header-overlay" />
         <div className="project-expanded-heading">

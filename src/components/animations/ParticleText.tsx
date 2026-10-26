@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, type CSSProperties } from 'react';
-import './ParticleText.css';
+import '@/styles/animations/ParticleText.css';
 
 export interface ParticleTextProps {
   text?: string;

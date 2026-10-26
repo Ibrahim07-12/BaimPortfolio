@@ -4,7 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { StickyScroll } from "@/components/animations/sticky-scroll-reveal";
 import achievementBackground from "@/ACHIEVEMENTS/JUDULUTAMA/bgyudis.jpeg";
 import achievementPortrait from "@/ACHIEVEMENTS/JUDULUTAMA/meyudis.png";
 import achievement1 from "@/ACHIEVEMENTS/sertifikasi/AC1.jpg";
@@ -12,7 +12,7 @@ import achievement2 from "@/ACHIEVEMENTS/sertifikasi/AC2.jpg";
 import achievement3 from "@/ACHIEVEMENTS/sertifikasi/AC3.png";
 import achievement4 from "@/ACHIEVEMENTS/sertifikasi/AC4.jpg";
 import achievement5 from "@/ACHIEVEMENTS/sertifikasi/AC5.jpg";
-import "./achievements-section.css";
+import "@/styles/sections/achievements-section.css";
 
 type Achievement = {
   title: string;
@@ -108,7 +108,7 @@ export default function AchievementsSection() {
               alt=""
               fill
               sizes="100vw"
-              priority
+
               className="achievements-background-image"
             />
           </motion.div>
@@ -121,7 +121,6 @@ export default function AchievementsSection() {
               src={achievementPortrait}
               alt="Muhammad Ibrahim at an award ceremony"
               fill
-              priority
               sizes="(max-width: 760px) 84vw, 58vw"
               className="achievements-portrait-image"
             />

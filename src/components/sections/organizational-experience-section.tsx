@@ -4,8 +4,8 @@ import Image, { type StaticImageData } from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
-import JumpingTextInstagram from "@/components/jumping-text-instagram";
-import { imagesRevealCardVariants } from "@/components/images-reveal";
+import JumpingTextInstagram from "@/components/animations/jumping-text-instagram";
+import { imagesRevealCardVariants } from "@/components/animations/images-reveal";
 import roboticsLogo from "@/Organisasi/ROBOTIK/UNY Robotics.png";
 import rk1 from "@/Organisasi/ROBOTIK/RK1.jpeg";
 import rk2 from "@/Organisasi/ROBOTIK/RK2.jpeg";
@@ -20,7 +20,7 @@ import hm3 from "@/Organisasi/HMVE/HM3.jpeg";
 import hm4 from "@/Organisasi/HMVE/HM4.jpeg";
 import hm5 from "@/Organisasi/HMVE/HM5.jpeg";
 import hmveProfile from "@/Organisasi/HMVE/PP HMVE.png";
-import "./organizational-experience-section.css";
+import "@/styles/sections/organizational-experience-section.css";
 
 interface Organization {
   id: string;

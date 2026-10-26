@@ -2,17 +2,17 @@
 
 import { FormEvent, useEffect, useRef, useState, type SVGProps } from "react";
 import { Mic, MicOff, Paperclip, Send, Trash2 } from "lucide-react";
-import LaserFlow from "@/components/LaserFlow";
-import Magnet from "@/components/Magnet";
-import GlideSelect from "@/components/GlideSelect";
+import LaserFlow from "@/components/animations/LaserFlow";
+import Magnet from "@/components/animations/Magnet";
+import GlideSelect from "@/components/animations/GlideSelect";
 import { SiGmail, SiInstagram, SiWhatsapp } from "@icons-pack/react-simple-icons";
-import "./contact-section.css";
+import "@/styles/sections/contact-section.css";
 
 declare global {
   interface Window {
     grecaptcha?: {
-      render: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void; "expired-callback": () => void }) => number;
-      reset: (widgetId?: number) => void;
+      render?: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void; "expired-callback": () => void }) => number;
+      reset?: (widgetId?: number) => void;
     };
   }
 }
@@ -63,7 +63,12 @@ export default function ContactSection() {
   useEffect(() => {
     if (!siteKey || !captchaRef.current) return;
     const renderCaptcha = () => {
-      if (window.grecaptcha && captchaRef.current && captchaWidget.current === undefined) {
+      if (
+        window.grecaptcha
+        && typeof window.grecaptcha.render === "function"
+        && captchaRef.current
+        && captchaWidget.current === undefined
+      ) {
         captchaWidget.current = window.grecaptcha.render(captchaRef.current, {
           sitekey: siteKey,
           callback: setCaptchaToken,
@@ -129,15 +134,31 @@ export default function ContactSection() {
     const onLocationError = () => {
       setLive((value) => ({ ...value, location: "Permission denied", status: "OFFLINE" }));
     };
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => void loadLiveData(coords.latitude, coords.longitude),
-      onLocationError,
-      { enableHighAccuracy: false, timeout: 8000 },
-    );
+    const contactSection = document.getElementById("contact");
+    let locationRequested = false;
+    const requestLocation = () => {
+      if (locationRequested) return;
+      locationRequested = true;
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => void loadLiveData(coords.latitude, coords.longitude),
+        onLocationError,
+        { enableHighAccuracy: false, timeout: 8000 },
+      );
+    };
+    const locationObserver: IntersectionObserver | null = contactSection
+      ? new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            requestLocation();
+            locationObserver?.disconnect();
+          }
+        }, { rootMargin: "600px 0px" })
+      : null;
+    if (locationObserver && contactSection) locationObserver.observe(contactSection);
     const interval = window.setInterval(() => updateClock(Intl.DateTimeFormat().resolvedOptions().timeZone), 1000);
     return () => {
       cancelled = true;
       window.clearInterval(interval);
+      locationObserver?.disconnect();
     };
   }, []);
 

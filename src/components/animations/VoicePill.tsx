@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft01Icon, Mic01Icon } from '@hugeicons/core-free-icons';
-import './VoicePill.css';
+import '@/styles/animations/VoicePill.css';
 
 export type VoicePillShape = 'pill' | 'rounded';
 export type VoicePillMode = 'auto' | 'hold' | 'toggle';

@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState } from "react";
-import ImageStackCarousel, { type ImageStackCard } from "@/components/ui/image-stack-carousel";
-import InversionCircleScrollAnimation from "@/components/ui/inversion-circle-scroll-animation";
+import ImageStackCarousel, { type ImageStackCard } from "@/components/animations/image-stack-carousel";
+import InversionCircleScrollAnimation from "@/components/animations/inversion-circle-scroll-animation";
 import komatsuLogo from "@/WORK/KOMATSU/KOMATSU.png";
 import km1 from "@/WORK/KOMATSU/KM1.jpeg";
 import km2 from "@/WORK/KOMATSU/KM2.jpeg";
@@ -19,7 +19,7 @@ import am3 from "@/WORK/AMNS/AM3.jpeg";
 import am4 from "@/WORK/AMNS/AM4.jpeg";
 import am5 from "@/WORK/AMNS/AM5.jpeg";
 import am6 from "@/WORK/AMNS/AM6.jpeg";
-import "./work-experience-section.css";
+import "@/styles/sections/work-experience-section.css";
 
 const experiences = [
   {

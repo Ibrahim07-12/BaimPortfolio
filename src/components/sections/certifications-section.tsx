@@ -4,7 +4,7 @@ import Image, { type StaticImageData } from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import ClothPeelReveal from "@/components/cloth-peel-reveal";
+import ClothPeelReveal from "@/components/animations/cloth-peel-reveal";
 import certificate1 from "@/certifications/CFT1.png";
 import certificate2 from "@/certifications/CFT2.png";
 import certificate3 from "@/certifications/CFT3.png";
@@ -15,7 +15,7 @@ import certificate7 from "@/certifications/CFT7.jpg";
 import certificate8 from "@/certifications/CFT8.jpg";
 import certificate9 from "@/certifications/CFT9.jpg";
 import certificate10 from "@/certifications/CFT10.jpg";
-import "./certifications-section.css";
+import "@/styles/sections/certifications-section.css";
 
 type Certificate = {
   title: string;

@@ -4,7 +4,7 @@ import { memo, useEffect, useRef, type CSSProperties } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Mail01Icon } from '@hugeicons/core-free-icons';
 
-import './ProfileCard.css';
+import '@/styles/animations/ProfileCard.css';
 
 type Palette = 'dark' | 'light';
 
