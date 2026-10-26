@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { memo, useEffect, useRef, type CSSProperties } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Mail01Icon } from '@hugeicons/core-free-icons';
@@ -363,7 +364,16 @@ const ProfileCard = ({
             <span className="profile-card__holo-shift" />
           </span>
           {avatarUrl && (
-            <img className="profile-card__photo" src={avatarUrl} alt={name || ''} loading="lazy" draggable={false} />
+            <Image
+              className="profile-card__photo"
+              src={avatarUrl}
+              alt={name || ''}
+              width={800}
+              height={800}
+              sizes="(max-width: 760px) 90vw, 396px"
+              loading="lazy"
+              draggable={false}
+            />
           )}
           {(name || title) && (
             <>
@@ -381,7 +391,7 @@ const ProfileCard = ({
           <div className="profile-card__footer">
             {miniAvatarUrl && (
               <span className="profile-card__avatar">
-                <img src={miniAvatarUrl} alt="" loading="lazy" draggable={false} />
+                <Image src={miniAvatarUrl} alt="" width={40} height={40} loading="lazy" draggable={false} />
               </span>
             )}
             <div className="profile-card__meta">

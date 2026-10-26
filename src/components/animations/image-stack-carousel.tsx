@@ -89,7 +89,7 @@ export default function ImageStackCarousel({ cards, label }: ImageStackCarouselP
                   src={card.image}
                   alt={card.alt}
                   fill
-                  loading="eager"
+                  loading={isFront ? "eager" : "lazy"}
                   sizes="(max-width: 760px) 90vw, 48vw"
                   className="image-stack-photo"
                 />
