@@ -106,6 +106,17 @@
   .about-copy-text { font-size: 1.08rem; }
 }
 
+@media (min-width: 761px) and (max-width: 991px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-profile-shell {
+    min-height: 520px;
+    order: -1;
+  }
+}
+
 @media (max-width: 420px) {
   .about-title-scroll-content { font-size: 2.8rem; }
   .about-tech-heading { height: 62px; }

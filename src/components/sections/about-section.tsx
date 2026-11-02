@@ -6,7 +6,7 @@ import ProfileCard from "@/components/animations/ProfileCard";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import TechText from "@/components/animations/TechText";
 import TextType from "@/components/animations/TextType";
-import profilePhoto from "@/foto/Myself.png";
+import profilePhoto from "@/foto/Myself.jpeg";
 import "@/styles/sections/about-section.css";
 
 const aboutCopy =

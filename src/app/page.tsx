@@ -12,10 +12,12 @@ import ContactSection from "@/components/sections/contact-section";
 import { AnimatedNavFramer } from "@/components/ui/navigation-menu";
 import { SmoothCursor } from "@/components/animations/smooth-cursor";
 import NotificationAlertDialog from "@/components/features/chat/notification-alert-dialog";
+import LoadingScreen from "@/components/features/loading/loading-screen";
 
 export default function Home() {
   return (
     <main>
+      <LoadingScreen />
       <AnimatedNavFramer />
       <SmoothCursor />
       <ChatRoom />

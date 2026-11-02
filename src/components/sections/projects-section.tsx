@@ -771,6 +771,7 @@ function ProjectsRail() {
   useEffect(() => {
     if (!activeProject) return;
     const previousOverflow = document.body.style.overflow;
+    const previousDocumentOverflow = document.documentElement.style.overflow;
     document.body.classList.add("project-details-open");
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape" && !mediaViewerOpen.current && !transitionMode) {
@@ -778,9 +779,11 @@ function ProjectsRail() {
       }
     };
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousDocumentOverflow;
       document.body.classList.remove("project-details-open");
       window.removeEventListener("keydown", closeOnEscape);
     };

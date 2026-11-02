@@ -19,6 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
       className="font-sans"
     >
+      <link rel="preload" href="/loading-screen/loading.lottie" as="fetch" crossOrigin="anonymous" />
       <body>{children}</body>
     </html>
   );
